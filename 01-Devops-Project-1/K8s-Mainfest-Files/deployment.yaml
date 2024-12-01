@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: new-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: new-app
+  template:
+    metadata:
+      name: new-pod
+      labels:
+        app: new-app
+    spec:
+      containers:
+      - name: new-container
+        image: gchauhan1517/ci-pipeline:latest   # replace with your Docker-image pushed on Dockerhub
+        ports:
+        - containerPort: 8080
