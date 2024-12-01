@@ -48,16 +48,8 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 </a>
 
 
-- **Jenkins** 
-- **Docker**
-- **Terraform**
-- **Git**
-- **Trivy**
-- **AWS EC2**
-- **Maven**
-- **Ansible**
-- **Kubernetes**
-- **Linux**
+**Jenkins**  **Docker** **Terraform** **Git** **Trivy** **AWS EC2** **Maven** **Ansible** **Kubernetes**
+**Linux**
 
 ## Server Configuration
 After provisioning Jenkins and Kubernetes servers using Terraform:
