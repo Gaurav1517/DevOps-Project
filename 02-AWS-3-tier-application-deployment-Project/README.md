@@ -4,3 +4,4 @@ In this architecture, a public-facing Application Load Balancer forwards client 
 
 ![project-snapshot](02-AWS-3-tier-application-deployment-Project/Snapshot/00-snapshot.png)
 
+
