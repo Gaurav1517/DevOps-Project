@@ -15,6 +15,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 
 
 ## Tools Used:
+
 <a href="https://www.jenkins.io">
   <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
 </a>  
@@ -30,9 +31,24 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 <a href="https://www.terraform.io">
   <img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform" width="100">
 </a>
+<a href="https://github.com">
+  <img src="https://www.svgrepo.com/svg/512317/github-142" alt="GitHub" width="100">
+</a>
+<a href="https://github.com/tonistiigi/trivy">
+  <img src="https://iconduck.com/icons/158894/trivy#" alt="Trivy" width="100">
+</a>
+<a href="https://aws.amazon.com">
+  <img src="https://www.svgrepo.com/svg/473527/amazonaws" alt="Amazon Web Services" width="100">
+</a>
+<a href="https://www.ansible.com">
+  <img src="https://www.svgrepo.com/svg/353399/ansible" alt="Ansible" width="100">
+</a>
+<a href="https://maven.apache.org">
+  <img src="https://www.svgrepo.com/svg/354051/maven" alt="Maven" width="100">
+</a>
 
 
-- **Jenkins** [![Jenkins Logo](https://get.jenkins.io/art/jenkins-logo/logo.svg)](https://www.jenkins.io)
+- **Jenkins** 
 - **Docker**
 - **Terraform**
 - **Git**
