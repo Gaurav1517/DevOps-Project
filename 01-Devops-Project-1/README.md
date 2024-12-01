@@ -1,7 +1,7 @@
 # DevOps Project: Comprehensive Deployment
 
 This project demonstrates the deployment of a DevOps pipeline using industry-standard tools and practices. It integrates continuous integration (CI) and continuous delivery (CD) pipelines, ensuring seamless and automated deployment processes.
-![snap](Snapshot/Devops-1-Snap.png)
+![snap](Snapshot/Project-architecute.png)
 
 ## Overview
 The project sets up Jenkins and Kubernetes servers dynamically using Terraform. Post provisioning, these servers are configured using user-data scripts for automated setup. The CI/CD pipelines cover code building, testing, containerization, vulnerability scanning, and deployment.
