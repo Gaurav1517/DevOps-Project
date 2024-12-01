@@ -15,7 +15,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 
 
 ## Tools Used:
-- **Jenkins**
+- **Jenkins** [![Website](https://raw.githubusercontent.com/praveenscience/praveenscience/master/soc/ws.svg](https://get.jenkins.io/art/jenkins-logo/logo.svg)
 - **Docker**
 - **Terraform**
 - **Git**
