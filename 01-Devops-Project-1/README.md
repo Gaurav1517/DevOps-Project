@@ -1,176 +1,172 @@
-#############################################################################
-
-After configuring server Jenkins & kubernetes using terraform. 
-Set root password on both server . 
-sudo su  OR sudo su - 
-Fistly , configure in   /etc/ssh/sshd_config file
- To automate the process of enabling root login and password authentication in the /etc/ssh/sshd_config file, you can use the sed command in a script or command sequence. Below are the steps to achieve this:
-Automation Steps
-
-    Update PermitRootLogin to yes using sed.
-    Update PasswordAuthentication to yes using sed.
-    Restart the sshd service to apply the changes.
-
-#!/bin/bash
-
-# File path
-SSH_CONFIG_FILE="/etc/ssh/sshd_config"
-
-# Backup the original file
-cp "$SSH_CONFIG_FILE" "${SSH_CONFIG_FILE}.bak"
-
-# Enable root login
-sed -i 's/^#?PermitRootLogin .*/PermitRootLogin yes/' "$SSH_CONFIG_FILE"
-
-# Enable password authentication
-sed -i 's/^#?PasswordAuthentication .*/PasswordAuthentication yes/' "$SSH_CONFIG_FILE"
-
-# Restart the SSHD service
-systemctl restart sshd
-
-echo "Root login and password authentication enabled. SSH service restarted."
-
-Make the script executable:
-chmod +x enable_root_login.sh
-
-Run the script as a superuser:
-sudo ./enable_root_login.sh
-
-Set root password. 
-passwd  root
-password
-
-#######################################################################################
-
-Now copy ssh authentication key from jenkins server to k8s server. 
-Create key using ssh-keygen comammnd .
-ssh-keygen
-root@worker-2:~# ls ~/.ssh/
-authorized_keys  id_rsa  id_rsa.pub
-
-Now copy this key to k8s server. 
-Syntax: ssh-copy-id username@private-ip-K8s-sever
-ssh-copy-id root@192.168.157.137
-
-check on k8s server
-ls ~/.ssh/
-authorized_keys  id_rsa  id_rsa.pub  known_hosts
-
-########################################################################################################
-
-Get jenkins password form the jenkins server
-http://pulic-ip-Jenkins-Server:8080
-sudo cat /etc/lib/jenkins/secrets/initialAdminPassword
-
-Installed Suggested plugins > Getting Started Username:admin password:password  Confirm password:password, Full Name: sysops amdin , E-mail-ID:gchauahan1517.ca20@chitkara.edu.in > Instance configuration http://public-ip-Jenkins-Server > Save and Finsish > Jenkins is ready! > Start using Jenkins .
-
-Configure some credentials in jenkins server like docker-hub , github(webhook)
-Manage Jenkins > Credentials > Store scoped to Jenkins > System:(global) > +Add Credentials >
-New Credentials > Kind:Username with password > Scope:Global(Jenkins, nodes, items, all child items, etc.) >
-Username:hub.docker-username > password:password> ID:hub-creds(NOte:calling in pipeline.) > Description: mY docker hub userName password.  SAVe
-
-Add EC2 pem key in Jenkins Credentials
-Dashboard > Manage Jenkins > Credentials > System> Global credentials(unrestricted) > New credentials> Kind:SSH Username with private key > Scope:Global(Jenkins, nodes, items, all child items, etc.) > ID:ec2_user > Description: Aws EC2 username & password > Private Key Key: . 
-
-
-Add Github Credentials for private repository in jenkins Global Credentials.
-Username top corner SEttings > Devloper Settings > Personal Access tokens (Token classic)> Generate classic token. > passsord github > Note: Github cred for jenkins -server. Expration:7 days.> Select scope Select all for now.  copy token 
-Save in Global credeniotal as secret text. 
-
-
-Configure maven in jenkins dashboard. or in Jenkins sever and set environment vairable. 
-I have alreday configure while configuring jenkins server.
-OR using jenkins dashboard. 
-Dashboard > Manage Jenkins > Tools > Maven installation > Add Maven Name:maven > Install automatically ✔️ > Install from Apache VErision:3.9.9 >Apply > Save.
-
-OR use this script  to configure. 
-
-#!/bin/bash
-# Maven installation
-echo Downloading and installing Maven 3.9.9...
-wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
-tar -xvzf apache-maven-3.9.9-bin.tar.gz
-mv apache-maven-3.9.9 /opt/maven
-
-# create a new file named maven.sh inside of the /etc/profile.d/ directory.
-touch /etc/profile.d/maven.sh
-
-# Setting up Maven environment variables
-echo Configuring Maven environment variables...
-echo export M2_HOME=/opt/maven | tee -a /etc/profile.d/maven.sh
-echo export MAVEN_HOME=/opt/maven | tee -a /etc/profile.d/maven.sh
-echo export PATH=\$M2_HOME/bin:\$PATH | tee -a /etc/profile.d/maven.sh
-echo export PATH=/opt/maven/apache-maven-3.9.9/bin:\$PATH | tee -a /etc/profile.d/maven.sh
-
-#Run this manual 
-#export JAVA_HOME=/usr/lib/jvm/jre-openjdk
-#export M2_HOME=/opt/maven
-#export MAVEN_HOME=/opt/maven
-#export PATH=${M2_HOME}/bin:${PATH}
-
-
-# Make the script executable by running the following chmod command:
-chmod +x /etc/profile.d/maven.sh
-
-# Source the profile again to ensure environment variables are loaded
-source /etc/profile.d/maven.sh
-
-# Set executable permissions for Maven binaries
-chmod +x /opt/maven/bin/mvn
-
-# Check mvn version 
- mvn -version
-
-
-
-Create pipeline. 
-CI-Pipeline. 
-
-Pipeline stages
-1. cleanup 
-2. Git Checkout
-3. Maven Unit Testing (pom.xml{Project Object Model}) 
-4. Maven Build (Code --> .jar)
-5. Maven Integration Testing
-6. Docker build ((Dockerfile) .jar -> image)
-7. scan Image for vulnerablilities (trivy)
-8. Docker tag (username/project-name:version-tag)
-9. Docker login , push to image to hub.docker.com 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# DevOps Project: Comprehensive Deployment
+
+This project demonstrates the deployment of a DevOps pipeline using industry-standard tools and practices. It integrates continuous integration (CI) and continuous delivery (CD) pipelines, ensuring seamless and automated deployment processes.
+
+
+## Overview
+The project sets up Jenkins and Kubernetes servers dynamically using Terraform. Post provisioning, these servers are configured using user-data scripts for automated setup. The CI/CD pipelines cover code building, testing, containerization, vulnerability scanning, and deployment.
+
+## Key Features
+- Dynamic server provisioning with Terraform.
+- Secure server configuration, including SSH key-based authentication.
+- Robust CI/CD pipeline implemented via Jenkins.
+- Automated containerization and vulnerability scanning.
+- Kubernetes-based deployment using Ansible.
+
+
+## Tools Used:
+- **Jenkins**
+- **Docker**
+- **Terraform**
+- **Git**
+- **Trivy**
+- **AWS EC2**
+- **Maven**
+- **Ansible**
+- **Kubernetes**
+- **Linux**
+
+## Server Configuration
+After provisioning Jenkins and Kubernetes servers using Terraform:
+
+- **Jenkins server configuration** is written in `app-install.tpl` (user-data).
+- **Kubernetes server configuration** is written in `k8s-install.tpl` (user-data).
+- The Terraform files contain dynamic code to launch the Kubernetes and Jenkins servers.
+
+### Commands to Run Terraform Code
+1. Initialize AWS cloud provider:
+   ```bash
+   terraform init
+   ```
+2. Validate the syntax of Terraform code:
+   ```bash
+   terraform validate
+   ```
+3. Format Terraform code:
+   ```bash
+   terraform fmt
+   ```
+4. Dry run:
+   ```bash
+   terraform plan
+   ```
+5. Apply changes:
+   ```bash
+   terraform apply --auto-approve
+   ```
+6. Destroy resources:
+   ```bash
+   terraform destroy --auto-approve
+   ```
+
+## Steps to Set Up the Servers
+
+### 1. Set Root Password on Both Servers
+1. Switch to the root user:
+   ```bash
+   sudo su
+   ```
+2. Configure the `/etc/ssh/sshd_config` file to enable root login and password authentication:
+   ```bash
+   #!/bin/bash
+
+   # File path
+   SSH_CONFIG_FILE="/etc/ssh/sshd_config"
+
+   # Backup the original file
+   cp "$SSH_CONFIG_FILE" "${SSH_CONFIG_FILE}.bak"
+
+   # Enable root login
+   sed -i 's/^#?PermitRootLogin .*/PermitRootLogin yes/' "$SSH_CONFIG_FILE"
+
+   # Enable password authentication
+   sed -i 's/^#?PasswordAuthentication .*/PasswordAuthentication yes/' "$SSH_CONFIG_FILE"
+
+   # Restart the SSHD service
+   systemctl restart sshd
+
+   echo "Root login and password authentication enabled. SSH service restarted."
+   ```
+3. Make the script executable and run it:
+   ```bash
+   chmod +x enable_root_login.sh
+   sudo ./enable_root_login.sh
+   ```
+4. Set the root password:
+   ```bash
+   passwd root
+   ```
+
+### 2. Copy SSH Authentication Key from Jenkins Server to Kubernetes Server
+1. Generate an SSH key pair on the Jenkins server:
+   ```bash
+   ssh-keygen
+   ```
+2. Copy the key to the Kubernetes server:
+   ```bash
+   ssh-copy-id root@<k8s-server-private-ip>
+   ```
+3. Verify the key on the Kubernetes server:
+   ```bash
+   ls ~/.ssh/
+   ```
+
+## Jenkins Configuration
+
+### 1. Access Jenkins
+1. Retrieve the Jenkins initial admin password:
+   ```bash
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
+2. Access Jenkins via `http://<public-ip-Jenkins-Server>:8080` and complete the setup wizard.
+
+### 2. Configure Credentials
+1. **Docker Hub Credentials**:
+   - Manage Jenkins > Credentials > System > Global > Add Credentials.
+   - Kind: Username with password.
+   - ID: `hub-creds`.
+
+2. **EC2 PEM Key**:
+   - Kind: SSH Username with private key.
+   - ID: `ec2_user`.
+
+3. **GitHub Credentials**:
+   - Generate a GitHub Personal Access Token with required scopes.
+   - Save it in Jenkins credentials as `secret text`.
+
+
+## CI/CD Pipeline
+
+### CI Pipeline Stages: (Refer to `Jenkinsfiles/Jenkinsfile-CI`)
+1. **Cleanup**: Remove existing artifacts.
+2. **Git Checkout**: Clone source code from the Git repository.
+3. **Maven Unit Testing**: Run tests using `pom.xml`.
+4. **Maven Build**: Package code into a `.jar` file.
+5. **Maven Integration Testing**: Ensure functionality between components.
+6. **Docker Build**: Build a Docker image from the `.jar` file using `Dockerfile`.
+7. **Scan Image**: Use Trivy to scan the Docker image for vulnerabilities.
+8. **Docker Tag**: Tag the Docker image with `username/project-name:version-tag`.
+9. **Docker Login & Push**: Push the Docker image to Docker Hub.
+
+### CD Pipeline Stages: (Refer to `Jenkinsfiles/Jenkinsfile-CD`)
+1. **Pull Files**:Copy Kubernetes manifest files from Jenkins workspace to the node server.
+2. **Manual Approval**: If 'manual approval' is required, then it is called 'Continuous Delivery'.
+   If it is totally automated, then it is called 'Continuous Deployment
+3. **Deployment**: Deploy Kubernetes resources using Ansible.
+   - Ensure passwordless SSH is set up between the master and node.
+   - Use a `deployment.yaml` file containing the Docker Hub image in the container block.
+
+## Additional Notes
+- Ensure the Kubernetes cluster is configured using Terraform.
+- Set up SSH key-based authentication between Jenkins and Kubernetes servers.
+- Configure Jenkins to trigger builds automatically via GitHub Webhooks.
+- Follow security best practices for credential management.
+
+## Highlights
+- Implements best practices for DevOps pipelines.
+- Fully automated setup and deployment processes.
+- Uses Terraform for infrastructure provisioning and Ansible for configuration management.
+- Leverages Docker and Kubernetes for scalable and portable application deployments.
+
+This project is a complete solution for organizations looking to implement automated DevOps pipelines using modern tools and technologies.
 
