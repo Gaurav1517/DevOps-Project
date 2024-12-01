@@ -15,11 +15,22 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 
 
 ## Tools Used:
-[![Jenkins](https://get.jenkins.io/art/jenkins-logo/logo.svg)](https://www.jenkins.io)  
-[![Docker](https://www.svgrepo.com/show/303231/docker-logo.svg)](https://www.docker.com)  
-[![Kubernetes](https://www.svgrepo.com/show/376331/kubernetes.svg)](https://kubernetes.io)  
-[![Linux](https://www.svgrepo.com/show/453370/linux.svg)](https://www.kernel.org)  
-[![Terraform](https://www.svgrepo.com/show/448253/terraform.svg)](https://www.terraform.io)  
+<a href="https://www.jenkins.io">
+  <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
+</a>  
+<a href="https://www.docker.com">
+  <img src="https://www.svgrepo.com/show/303231/docker-logo.svg" alt="Docker" width="100">
+</a>  
+<a href="https://kubernetes.io">
+  <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
+</a>  
+<a href="https://www.kernel.org">
+  <img src="https://www.svgrepo.com/show/453370/linux.svg" alt="Linux" width="100">
+</a>  
+<a href="https://www.terraform.io">
+  <img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform" width="100">
+</a>
+
 
 - **Jenkins** [![Jenkins Logo](https://get.jenkins.io/art/jenkins-logo/logo.svg)](https://www.jenkins.io)
 - **Docker**
