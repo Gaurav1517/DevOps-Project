@@ -111,6 +111,32 @@ After provisioning Jenkins and Kubernetes servers using Terraform:
    ls ~/.ssh/
    ```
 
+## System Verification Commands
+To verify that all required packages and services are installed and running, use the following commands:
+
+```bash
+# Check Ansible version
+ansible --version
+
+# Check Java version
+java -version
+
+# Check Maven version
+mvn -version
+
+# Check Trivy version
+trivy --version
+
+# Check Docker version
+docker --version
+
+# Check git version
+git --version
+
+# Check Jenkins service status
+systemctl status jenkins.service
+```
+
 ![snap-all-packages](Snapshot/tools.png)
 ![snap-Jenkins-server-status](Snapshot/Jenkins-server.png)
 ![snap-jenkins-Dashboard](Snapshot/Jenkins-Dashboard.png)
