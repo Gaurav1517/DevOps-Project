@@ -1,7 +1,7 @@
 # DevOps Project: Comprehensive Deployment
 
 This project demonstrates the deployment of a DevOps pipeline using industry-standard tools and practices. It integrates continuous integration (CI) and continuous delivery (CD) pipelines, ensuring seamless and automated deployment processes.
-
+![snap](Snapshot/Devops-1-Snap.png)
 
 ## Overview
 The project sets up Jenkins and Kubernetes servers dynamically using Terraform. Post provisioning, these servers are configured using user-data scripts for automated setup. The CI/CD pipelines cover code building, testing, containerization, vulnerability scanning, and deployment.
@@ -111,6 +111,10 @@ After provisioning Jenkins and Kubernetes servers using Terraform:
    ls ~/.ssh/
    ```
 
+![snap-all-packages](Snapshot/tools.png)
+![snap-Jenkins-server-status](Snapshot/Jenkins-server.png)
+![snap-jenkins-Dashboard](Snapshot/Jenkins-Dashboard.png)
+
 ## Jenkins Configuration
 
 ### 1. Access Jenkins
@@ -133,7 +137,11 @@ After provisioning Jenkins and Kubernetes servers using Terraform:
 3. **GitHub Credentials**:
    - Generate a GitHub Personal Access Token with required scopes.
    - Save it in Jenkins credentials as `secret text`.
+   - 
+![snap-jenkins-credentials](Snapshot/Credentials.png)
 
+## Kubernetes clusture
+![snap-k8s-server](Snapshot/k8s-server.png)
 
 ## CI/CD Pipeline
 
@@ -148,6 +156,11 @@ After provisioning Jenkins and Kubernetes servers using Terraform:
 8. **Docker Tag**: Tag the Docker image with `username/project-name:version-tag`.
 9. **Docker Login & Push**: Push the Docker image to Docker Hub.
 
+![snap-CI-pipeline](Snapshot/CI-Pipeline.png)
+![snap-CI-Pipeline-workspace](Snapshot/CI-pipeline-Workspace.png)
+![snap-registry-Image-dockerHub](Snapshot/hub-docker-registory-image.png)
+
+
 ### CD Pipeline Stages: (Refer to `Jenkinsfiles/Jenkinsfile-CD`)
 1. **Pull Files**:Copy Kubernetes manifest files from Jenkins workspace to the node server.
 2. **Manual Approval**: If 'manual approval' is required, then it is called 'Continuous Delivery'.
@@ -155,6 +168,10 @@ After provisioning Jenkins and Kubernetes servers using Terraform:
 3. **Deployment**: Deploy Kubernetes resources using Ansible.
    - Ensure passwordless SSH is set up between the master and node.
    - Use a `deployment.yaml` file containing the Docker Hub image in the container block.
+
+![snap-CD-pipeline](Snapshot/CD-pipeline.png)
+![snap-deployment-service-pod](Snapshot/service-pod.png)
+![snap](Snapshot/Devops-1-Snap.png)
 
 ## Additional Notes
 - Ensure the Kubernetes cluster is configured using Terraform.
