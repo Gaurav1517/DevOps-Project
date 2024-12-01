@@ -1,0 +1,29 @@
+# Database Creation
+
+Execute the following SQL command to create the database
+CREATE DATABASE my_database;
+
+Table Creation
+
+After creating the database, use the following SQL command to create the transactions table:
+
+USE my_database;
+
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    amount DECIMAL(10, 2) NOT NULL,
+    description VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Configuring DbConfig
+
+Ensure the DbConfig.js file contains the correct database connection information. For example:
+
+module.exports = {
+    DB_HOST: 'your-database-host', // e.g., 'localhost' or 'RDS endpoint'
+    DB_USER: 'your-username',     // e.g., 'admin'
+    DB_PWD: 'your-password',      // Database password
+    DB_DATABASE: 'my_database'    // The database name created above
+};
+
