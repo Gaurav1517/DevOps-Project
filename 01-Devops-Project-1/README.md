@@ -14,7 +14,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 - Kubernetes-based deployment using Ansible.
 
 
-## Tools Used:
+## Tools Used
 
 <a href="https://www.jenkins.io">
   <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
@@ -32,19 +32,19 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
   <img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform" width="100">
 </a>
 <a href="https://github.com">
-  <img src="https://www.svgrepo.com/svg/512317/github-142" alt="GitHub" width="100">
+  <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" width="100">
 </a>
 <a href="https://github.com/tonistiigi/trivy">
-  <img src="https://iconduck.com/icons/158894/trivy#" alt="Trivy" width="100">
+  <img src="https://trivy.dev/v0.46/imgs/logo.png" alt="Trivy" width="100">
 </a>
-<a href="https://aws.amazon.com">
-  <img src="https://www.svgrepo.com/svg/473527/amazonaws" alt="Amazon Web Services" width="100">
+<a href="https://aws.amazon.com/ec2">
+  <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" alt="Amazon Web Services" width="100">
 </a>
 <a href="https://www.ansible.com">
-  <img src="https://www.svgrepo.com/svg/353399/ansible" alt="Ansible" width="100">
+  <img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible" width="100">
 </a>
 <a href="https://maven.apache.org">
-  <img src="https://www.svgrepo.com/svg/354051/maven" alt="Maven" width="100">
+  <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
 </a>
 
 
