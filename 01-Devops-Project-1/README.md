@@ -15,6 +15,12 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 
 
 ## Tools Used:
+[![Jenkins](https://get.jenkins.io/art/jenkins-logo/logo.svg)](https://www.jenkins.io)  
+[![Docker](https://www.svgrepo.com/show/303231/docker-logo.svg)](https://www.docker.com)  
+[![Kubernetes](https://www.svgrepo.com/show/376331/kubernetes.svg)](https://kubernetes.io)  
+[![Linux](https://www.svgrepo.com/show/453370/linux.svg)](https://www.kernel.org)  
+[![Terraform](https://www.svgrepo.com/show/448253/terraform.svg)](https://www.terraform.io)  
+
 - **Jenkins** [![Jenkins Logo](https://get.jenkins.io/art/jenkins-logo/logo.svg)](https://www.jenkins.io)
 - **Docker**
 - **Terraform**
