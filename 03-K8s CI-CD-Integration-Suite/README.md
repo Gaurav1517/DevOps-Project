@@ -4,7 +4,38 @@
 
 This project focuses on designing and implementing a CI/CD pipeline to build and deploy application artifacts on a Kubernetes cluster. The primary goal is to automate the entire process, starting from code integration to deployment on a scalable, fault-tolerant Kubernetes environment, leveraging the best practices of DevOps and cloud-native technologies.  
 
+## **Architecture**:
+
+
 ## **Tool Used**:
+
+<a href="https://www.jenkins.io">
+  <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
+</a>
+<a href="https://www.docker.com">
+  <img src="https://www.svgrepo.com/show/303231/docker-logo.svg" alt="Docker" width="100">
+</a>
+<a href="https://kubernetes.io">
+  <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
+</a>
+<a href="https://www.kernel.org">
+  <img src="https://www.svgrepo.com/show/453370/linux.svg" alt="Linux" width="100">
+</a>
+<a href="https://github.com">
+  <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" width="100">
+</a>
+<a href="https://www.ansible.com">
+  <img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible" width="100">
+</a>
+<a href="https://maven.apache.org">
+  <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
+</a>
+<a href="https://aws.amazon.com">
+  <img src="https://www.svgrepo.com/show/376356/aws.svg" alt="AWS" width="100">
+</a>
+<a href="https://git-scm.com">
+  <img src="https://www.svgrepo.com/show/452210/git.svg" alt="Git" width="100">
+</a>
 
 
 ### Key Highlights:
