@@ -19,13 +19,13 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
   <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
 </a>
 <a href="https://www.kernel.org">
-  <img src="https://www.svgrepo.com/show/453370/linux.svg" alt="Linux" width="100">
+  <img src="https://www.svgrepo.com/show/354004/linux-tux.svg" alt="Linux" width="100">
 </a>
 <a href="https://github.com">
-  <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" width="100">
+  <img src="https://www.svgrepo.com/show/475654/github-color.svg" alt="GitHub" width="100">
 </a>
 <a href="https://www.ansible.com">
-  <img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible" width="100">
+  <img src="https://www.svgrepo.com/show/353399/ansible.svg" alt="Ansible" width="100">
 </a>
 <a href="https://maven.apache.org">
   <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
