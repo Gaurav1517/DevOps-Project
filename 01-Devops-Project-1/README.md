@@ -32,7 +32,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
   <img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform" width="100">
 </a>
 <a href="https://github.com">
-  <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" width="100">
+  <img src="https://www.svgrepo.com/show/475654/github-color.svg" alt="GitHub" width="100">
 </a>
 <a href="https://github.com/tonistiigi/trivy">
   <img src="https://trivy.dev/v0.46/imgs/logo.png" alt="Trivy" width="100">
@@ -41,7 +41,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" alt="Amazon Web Services" width="100">
 </a>
 <a href="https://www.ansible.com">
-  <img src="https://www.svgrepo.com/show/373429/ansible.svg" alt="Ansible" width="100">
+  <img src="https://www.svgrepo.com/show/353399/ansible.svg" alt="Ansible" width="100">
 </a>
 <a href="https://maven.apache.org">
   <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
