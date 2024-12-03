@@ -9,23 +9,20 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
 
 ## **Tool Used**:
 
-<a href="https://www.jenkins.io">
-  <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
-</a>
-<a href="https://www.docker.com">
-  <img src="https://www.svgrepo.com/show/303231/docker-logo.svg" alt="Docker" width="100">
-</a>
-<a href="https://kubernetes.io">
-  <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
+<a href="https://aws.amazon.com">
+  <img src="https://www.svgrepo.com/show/376356/aws.svg" alt="AWS" width="100">
 </a>
 <a href="https://www.kernel.org">
   <img src="https://www.svgrepo.com/show/354004/linux-tux.svg" alt="Linux" width="100">
 </a>
+<a href="https://git-scm.com">
+  <img src="https://www.svgrepo.com/show/452210/git.svg" alt="Git" width="100">
+</a>
 <a href="https://github.com">
   <img src="https://www.svgrepo.com/show/475654/github-color.svg" alt="GitHub" width="100">
 </a>
-<a href="https://www.ansible.com">
-  <img src="https://www.svgrepo.com/show/353399/ansible.svg" alt="Ansible" width="100">
+<a href="https://www.jenkins.io">
+  <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
 </a>
 <a href="https://maven.apache.org">
   <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
@@ -33,11 +30,14 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
 <a href="https://github.com/tonistiigi/trivy">
   <img src="https://trivy.dev/v0.46/imgs/logo.png" alt="Trivy" width="100">
 </a>
-<a href="https://aws.amazon.com">
-  <img src="https://www.svgrepo.com/show/376356/aws.svg" alt="AWS" width="100">
+<a href="https://www.docker.com">
+  <img src="https://www.svgrepo.com/show/303231/docker-logo.svg" alt="Docker" width="100">
 </a>
-<a href="https://git-scm.com">
-  <img src="https://www.svgrepo.com/show/452210/git.svg" alt="Git" width="100">
+<a href="https://www.ansible.com">
+  <img src="https://www.svgrepo.com/show/353399/ansible.svg" alt="Ansible" width="100">
+</a>
+<a href="https://kubernetes.io">
+  <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
 </a>
 
 
@@ -53,7 +53,7 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
 
 #### Here's a step-by-step guide to set up Jenkins, Maven, and Docker on the **main server** and Kubernetes on a **secondary machine**:
 
-## **Main Server Setup: Jenkins, Maven, Docker**
+## **Main Server Setup: Jenkins, Java, Maven, Docker, Git, Ansible, Trivy**
 
 ### **1. Install Jenkins**  
 1. Update the system and install Java:  
