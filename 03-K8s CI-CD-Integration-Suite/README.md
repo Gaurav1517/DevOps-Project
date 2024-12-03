@@ -30,6 +30,9 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
 <a href="https://maven.apache.org">
   <img src="https://www.svgrepo.com/show/354051/maven.svg" alt="Maven" width="100">
 </a>
+<a href="https://github.com/tonistiigi/trivy">
+  <img src="https://trivy.dev/v0.46/imgs/logo.png" alt="Trivy" width="100">
+</a>
 <a href="https://aws.amazon.com">
   <img src="https://www.svgrepo.com/show/376356/aws.svg" alt="AWS" width="100">
 </a>
