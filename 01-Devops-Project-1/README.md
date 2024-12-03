@@ -26,7 +26,7 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
   <img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="100">
 </a>  
 <a href="https://www.kernel.org">
-  <img src="https://www.svgrepo.com/show/453370/linux.svg" alt="Linux" width="100">
+  <img src="https://www.svgrepo.com/show/354004/linux-tux.svg" alt="Linux" width="100">
 </a>  
 <a href="https://www.terraform.io">
   <img src="https://www.svgrepo.com/show/448253/terraform.svg" alt="Terraform" width="100">
