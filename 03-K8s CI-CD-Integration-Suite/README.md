@@ -5,7 +5,7 @@
 This project focuses on designing and implementing a CI/CD pipeline to build and deploy application artifacts on a Kubernetes cluster. The primary goal is to automate the entire process, starting from code integration to deployment on a scalable, fault-tolerant Kubernetes environment, leveraging the best practices of DevOps and cloud-native technologies.  
 
 ## **Architecture**:
-
+![archit-k8s-snap](Snap-k8s-CI-CD/K8S-CI-CD-Architecture.png)
 
 ## **Tool Used**:
 
