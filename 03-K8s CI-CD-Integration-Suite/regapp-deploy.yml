@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: myapp-container
-        image: myrepo/myapp
+        image: gchauhan1517/k8s-ci-cd-integration-suite-pipeline:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
