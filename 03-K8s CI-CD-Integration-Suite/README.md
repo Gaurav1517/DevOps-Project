@@ -439,6 +439,6 @@ If everything is configured correctly, you should receive a successful "pong" re
 ![deploy-service-pod](Snap-k8s-CI-CD/deploy-service-pod.png)
 
 ## **Get acces application with kubernetes server ip and service port.**
-http://<k8s-server:service-port/webapp>
+http://<<k8s-server:service-port/webapp>>
 
 ![deployed-snap](Snap-k8s-CI-CD/deployed-snap.png)
