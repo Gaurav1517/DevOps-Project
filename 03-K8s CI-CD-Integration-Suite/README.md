@@ -1,4 +1,4 @@
-# Kubernetes CI/CD Integration Suite
+ # Kubernetes CI/CD Integration Suite
 
 ## **Project Description: Building and Deploying Artifacts on Kubernetes**  
 
@@ -214,6 +214,70 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
     ansible --version
   ```
 
+## Login to jenkins server using public ip of jenkins server through port 8080
+```bash
+http://<localhost:8080>
+```
+need to get the Administrator Password from /var/lib/jenkins/secrets/initialAdminPassword
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+Successfully set up Jenkins server and logged in.
+
+Next, proceed with installing plugins 
+# Install plugins 
+- **SSH Agent**
+- **Plugin Maven** 
+- **Pipeline: Stage View Plugin** 
+
+# Configure credentials of docker hub, github, ansible-server (which is jenkins-server itself) in Jenkins Dashboard.
+
+Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) > Add credentials > New credentials > Kind: User
+
+## Create Github token for Jenkins:
+1. Go to github.com/ > User Settings > Developers Setting > Personal Access Tokens > Token (classic).
+2. Generate new token > Generate new token (classic).
+3. Prompt GitHub password.
+4. New personal access token (classic): Note: Jenkins_project-1_token.
+5. Expiration: 7 days.
+6. Select scopes: Scopes define the access for personal tokens. For now, select all checkboxes.
+7. Generate token and copy the token (because once the page refreshes, the token won't be visible any more).
+8. Add the token to Jenkins Credentials:
+   - Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) > Add credentials.
+   - Kind: Secret text.
+   - Secret: Paste the GitHub token.
+   - ID: github-token.
+
+## Add Docker Hub credentials:
+1. Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) > Add credentials.
+2. Kind: Username with password.
+3. Username: Your Docker Hub username.
+4. Password: Your Docker Hub password.
+5. ID: docker-hub.
+
+## Add Ansible server private key:
+
+1. Create a private key using ssh-keygen:
+
+    - Run ssh-keygen in the terminal.
+
+    -  Save the key in the ~/.ssh directory.
+
+2. Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) > Add credentials.
+
+3. Kind: SSH Username with private key.
+
+4. Username: ansible.
+
+5. Private Key: Paste the private key content from the generated file (e.g., ~/.ssh/id_rsa).
+
+6. ID: ansible-private-key.
+
+## **Main Machine configured successfully!!** 
+
+
+
+
 ## **Secondary Machine Setup: Kubernetes**
 
 ### **1. Install Kubernetes Tools (kubectl, kubeadm, kubelet)**
@@ -297,6 +361,3 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
    ```
 
 ---
-
-
-T
