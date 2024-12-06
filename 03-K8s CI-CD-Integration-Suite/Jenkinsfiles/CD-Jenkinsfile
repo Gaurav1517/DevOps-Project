@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    // DECLARE THE VARIABLES HERE:
+    environment {
+        NODE_IP = '192.168.157.137'   // paste your Node-Server private IP here
+        EC2_NAME = "root"             // enter your AWS EC2 username
+        PIPELINE_NAME = "K8s-CI-CD-Integration-Suite-Pipeline" // pipeline name
+        PROJECT_NAME = "DevopsProject1"  // project name
+    }
+
+    stages {
+        stage("1. Pull Files") {
+            steps {
+                sshagent(['jenkins_server']) {
+                    // Execute Ansible playbook
+                    sh "ansible-playbook -i /etc/ansible/hosts -u ${EC2_NAME} -e pipeline_name=${PIPELINE_NAME} /var/lib/jenkins/workspace/K8s-CI-CD-Integration-Suite-Pipeline/pull-files.yml"
+                }
+            }
+        }
+
+        stage('2. Approval') {
+            steps {
+                input message: 'Approve deployment?'
+            }
+        }
+
+        stage("3. Deployment") {
+            steps {
+                sshagent(['jenkins_server']) {
+                    sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl apply -f /root/k8s-manifest/deployment.yml"
+                    sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl apply -f /root/k8s-manifest/service.yml"
+                    sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl rollout restart deploy"
+                    sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl get service"
+                }
+            }
+        }
+    }
+}
