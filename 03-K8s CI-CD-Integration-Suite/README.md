@@ -515,7 +515,6 @@ This Jenkins pipeline automates the process of building, testing, and deploying 
 
 This pipeline ensures that the Java application is continuously integrated with secure image scanning and efficient resource management. It also helps to automate the deployment of the application to Docker Hub for easy access and deployment.
 
-Here is a description of the CD pipeline in your `Jenkinsfile` for inclusion in a `README.md` file:
 ![CI-pipeline](Snap-k8s-CI-CD/CI-Pipeline.png)
 
 ## Registry docker image 
