@@ -213,6 +213,7 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
     pip3 --version
     ansible --version
   ```
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
 
 ## Login to jenkins server using public ip of jenkins server through port 8080
 ```bash
@@ -222,6 +223,8 @@ need to get the Administrator Password from /var/lib/jenkins/secrets/initialAdmi
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+
 Successfully set up Jenkins server and logged in.
 
 Next, proceed with installing plugins 
@@ -230,7 +233,7 @@ Next, proceed with installing plugins
 - **Plugin Maven** 
 - **Pipeline: Stage View Plugin** 
 
-# Configure credentials of docker hub, github, ansible-server (which is jenkins-server itself) in Jenkins Dashboard.
+# Configure credentials of docker hub, github, ansible-server in Jenkins Dashboard.
 
 Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted) > Add credentials > New credentials > Kind: User
 
@@ -273,7 +276,80 @@ Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestri
 
 6. ID: ansible-private-key.
 
-## **Main Machine configured successfully!!** 
+
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+
+To copy an SSH key to a Kubernetes server for Ansible SSH authentication, you can follow these steps:
+
+### 1. **Generate an SSH Key Pair (If You Don't Have One)**
+
+If you haven't already generated an SSH key pair, you can do so by running:
+
+```bash
+ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
+```
+
+This will generate an RSA SSH key pair with a 2048-bit key size. The private key will be saved to `~/.ssh/id_rsa` and the public key to `~/.ssh/id_rsa.pub`.
+
+### 2. **Copy the Public SSH Key to the Kubernetes Server**
+
+To enable Ansible to authenticate via SSH, you need to copy the public key to the Kubernetes server. Use the `ssh-copy-id` command or manually append the public key.
+
+#### Using `ssh-copy-id`:
+```bash
+ssh-copy-id user@k8s-server
+```
+Replace `user` with the appropriate username and `k8s-server` with the IP address or hostname of your Kubernetes server.
+
+#### Manually Adding the Public Key:
+If `ssh-copy-id` is not available, you can manually copy the contents of the public key (`~/.ssh/id_rsa.pub`) and append it to the `~/.ssh/authorized_keys` file on the Kubernetes server:
+
+1. Display the contents of the public key:
+   ```bash
+   cat ~/.ssh/id_rsa.pub
+   ```
+2. SSH into the Kubernetes server:
+   ```bash
+   ssh user@k8s-server
+   ```
+3. On the server, open or create the `~/.ssh/authorized_keys` file:
+   ```bash
+   mkdir -p ~/.ssh
+   nano ~/.ssh/authorized_keys
+   ```
+4. Paste the contents of your public key into the `authorized_keys` file and save.
+
+### 3. **Verify SSH Connection**
+
+After copying the public key, verify that you can SSH into the Kubernetes server without needing a password:
+
+```bash
+ssh user@k8s-server
+```
+
+If you're able to log in without entering a password, SSH key authentication is set up correctly.
+
+### 4. **Configure Ansible to Use SSH**
+
+Ensure that your Ansible inventory is configured to use SSH for authentication. In your Ansible `inventory` file, you can specify the SSH user:
+
+```ini
+[kubernetes]
+192.168.157.137
+```
+
+### 5. **Test Ansible SSH Connection**
+
+Finally, test that Ansible can authenticate and connect to the Kubernetes server:
+
+```bash
+ansible k8s-server -m ping
+```
+
+If everything is configured correctly, you should receive a successful "pong" response from Ansible.
+
+
+   ## **MAIN MACHINE CONFIGURED SUCCESSFULLY!!** 
 
 
 
@@ -348,8 +424,6 @@ Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestri
    --discovery-token-ca-cert-hash sha256:<hash>
    ```
 
----
-
 ###  Verify Kubernetes Cluster**
 1. Check nodes:
    ```bash
@@ -359,5 +433,8 @@ Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestri
    ```bash
    kubectl get pods -A
    ```
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png) 
 
----
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+
+![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
