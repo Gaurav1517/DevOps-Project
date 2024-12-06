@@ -436,6 +436,145 @@ If everything is configured correctly, you should receive a successful "pong" re
    ```
 ![tools-k8s-server](Snap-k8s-CI-CD/tools-k8s-server.png) 
 
+Here’s a description of the CI pipeline in your `Jenkinsfile` for inclusion in a `README.md` file:
+
+---
+
+## CI Pipeline Overview
+
+This Jenkins pipeline automates the process of building, testing, and deploying a Dockerized Java application using Maven. The pipeline consists of multiple stages to ensure that the application is thoroughly tested, built, and securely deployed to Docker Hub.
+
+### Stages:
+
+1. **Cleanup Workspace**:
+    - This stage cleans up the Jenkins workspace to ensure no leftover files from previous builds.
+    - **Step**: `cleanWs()`
+
+2. **Git Checkout**:
+    - The pipeline pulls the latest code from the `main` branch of the specified Git repository.
+    - **Step**: `git branch: 'main', url: 'https://github.com/Gaurav1517/AWS-Examples.git'`
+
+3. **Maven Unit Test**:
+    - This stage runs unit tests on the code to check the functionality of individual units.
+    - **Step**: `sh 'mvn test'`
+
+4. **Maven Build**:
+    - The code is compiled and packaged into a `.jar` file using Maven.
+    - **Step**: `sh 'mvn clean install'`
+
+5. **Maven Integration Test**:
+    - This stage verifies that the application works as expected when different parts of the system interact.
+    - **Step**: `sh 'mvn verify'`
+
+6. **Docker Image Build**:
+    - The pipeline navigates to the directory containing the `Dockerfile` and builds the Docker image.
+    - The image is tagged using the Jenkins job name and build number.
+    - **Step**: `sh "docker build -t ${JOB}:${BUILD_NUMBER} ."`
+
+7. **Docker Image Tag**:
+    - The Docker image is tagged with both the build number and the `latest` tag to make it easy to identify and pull.
+    - **Step**: 
+      ```bash
+      sh "docker tag ${JOB}:${BUILD_NUMBER} ${DOCKER_USERNAME}/${JOB}:v${BUILD_NUMBER}"
+      sh "docker tag ${JOB}:${BUILD_NUMBER} ${DOCKER_USERNAME}/${JOB}:latest"
+      ```
+
+8. **Trivy Image Scan**:
+    - The pipeline scans the Docker image for vulnerabilities using **Trivy**, a security scanner.
+    - The results are saved to an HTML file for reporting.
+    - **Step**: `sh "trivy image --format table ${DOCKER_USERNAME}/${JOB}:v${BUILD_NUMBER} -o image-report.html"`
+
+9. **Docker Image Push**:
+    - The pipeline logs in to Docker Hub using the stored credentials and pushes the built Docker image to the repository.
+    - Both the versioned image and the `latest` tag are pushed to Docker Hub.
+    - **Step**:
+      ```bash
+      sh "docker login -u '${docker_user}' -p '${docker_pass}'"
+      sh "docker push ${docker_user}/${JOB}:v${BUILD_NUMBER}"
+      sh "docker push ${docker_user}/${JOB}:latest"
+      ```
+
+10. **Docker Image Cleanup**:
+    - Unwanted Docker images are removed to free up space on the Jenkins server.
+    - The cleanup process targets dangling images related to the project to ensure efficient resource usage.
+    - **Step**: `sh 'docker images --format "{{.Repository}}:{{.Tag}}" | grep -E "^gchauhan1517|^demo" | xargs -r docker rmi -f'`
+
+---
+
+### Environment Variables:
+- **DOCKER_USERNAME**: The Docker Hub username used for pushing the images to the registry.
+    - **Example**: `"gchauhan1517"`
+
+### Tools:
+- **Maven**: Required for building and testing the Java project.
+
+### Credentials:
+- **docker-hub-creds**: The Jenkins credentials used for Docker Hub login.
+
+---
+
+This pipeline ensures that the Java application is continuously integrated with secure image scanning and efficient resource management. It also helps to automate the deployment of the application to Docker Hub for easy access and deployment.
+
+Here is a description of the CD pipeline in your `Jenkinsfile` for inclusion in a `README.md` file:
+![CI-pipeline](Snap-k8s-CI-CD/CI-Pipeline.png)
+
+## Registry docker image 
+![registry-image](Snap-k8s-CI-CD/registry-image.png)
+
+## CD Pipeline Overview
+
+This Continuous Deployment (CD) pipeline automates the process of deploying an application to a Kubernetes cluster using `kubectl` commands. It interacts with an AWS EC2 instance and executes deployment tasks, all while ensuring that appropriate approvals are obtained before applying changes.
+
+### Stages:
+
+1. **Pull Files**:
+    - In this stage, the pipeline pulls the necessary files for deployment from a Git repository or local workspace.
+    - The pipeline uses an **Ansible playbook** to fetch and prepare files for the deployment process.
+    - **Step**:
+      ```bash
+      sh "ansible-playbook -i /etc/ansible/hosts -u ${EC2_NAME} -e pipeline_name=${PIPELINE_NAME} /var/lib/jenkins/workspace/K8s-CI-CD-Integration-Suite-Pipeline/pull-files.yml"
+      ```
+    - The `sshagent` block is used to authenticate the SSH connection to the remote server via Jenkins credentials (`jenkins_server`).
+
+2. **Approval**:
+    - The pipeline waits for manual approval before proceeding with the deployment.
+    - The **`input`** step pauses the pipeline execution and asks for confirmation: "Approve deployment?"
+    - This ensures that no deployment happens without explicit consent from a user or administrator.
+
+3. **Deployment**:
+    - The deployment stage executes several commands on the target EC2 instance:
+        1. The Kubernetes **deployment configuration** is applied via the `kubectl` command.
+        2. The **service configuration** is applied to expose the application.
+        3. The deployment is restarted using `kubectl rollout restart` to apply the changes.
+        4. Finally, the service status is checked using `kubectl get service` to verify that the deployment was successful.
+    - **Steps**:
+      ```bash
+      sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl apply -f /root/k8s-manifest/deployment.yml"
+      sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl apply -f /root/k8s-manifest/service.yml"
+      sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl rollout restart deploy"
+      sh "ssh -o StrictHostKeyChecking=no ${EC2_NAME}@${NODE_IP} kubectl get service"
+      ```
+    - The `sshagent` block is used again to authenticate the SSH connection, and the `StrictHostKeyChecking=no` option ensures that SSH does not prompt for verification of the host key.
+
+---
+### Environment Variables:
+- **NODE_IP**: The private IP address of the target EC2 instance where the Kubernetes deployment will happen.
+    - **Example**: `'192.168.157.137'`
+- **EC2_NAME**: The SSH username for the EC2 instance.
+    - **Example**: `'root'`
+- **PIPELINE_NAME**: The name of the pipeline.
+    - **Example**: `"K8s-CI-CD-Integration-Suite-Pipeline"`
+- **PROJECT_NAME**: The name of the project being deployed.
+    - **Example**: `"DevopsProject1"`
+
+### Credentials:
+- **jenkins_server**: The Jenkins credentials used for SSH access to the EC2 instance.
+---
+
+This CD pipeline ensures that the application is deployed to the Kubernetes cluster only after a successful file pull, followed by an approval step. The deployment process is automated and verified with the appropriate checks, ensuring a smooth and efficient deployment to production.
+
+![CD-Pipeline](Snap-k8s-CI-CD/CD-Pipeline.png)
+
 ![deploy-service-pod](Snap-k8s-CI-CD/deploy-service-pod.png)
 
 ## **Get acces application with kubernetes server ip and service port.**
