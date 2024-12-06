@@ -213,7 +213,7 @@ This project focuses on designing and implementing a CI/CD pipeline to build and
     pip3 --version
     ansible --version
   ```
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+![tools-configusre-jenkins-server](Snap-k8s-CI-CD/tools-confi-jenkins-server.png)
 
 ## Login to jenkins server using public ip of jenkins server through port 8080
 ```bash
@@ -223,7 +223,7 @@ need to get the Administrator Password from /var/lib/jenkins/secrets/initialAdmi
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+![jenkins-login](Snap-k8s-CI-CD/jenkins-login.png)
 
 Successfully set up Jenkins server and logged in.
 
@@ -277,7 +277,7 @@ Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestri
 6. ID: ansible-private-key.
 
 
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+![credentials](Snap-k8s-CI-CD/credentials.png)
 
 To copy an SSH key to a Kubernetes server for Ansible SSH authentication, you can follow these steps:
 
@@ -345,6 +345,7 @@ Finally, test that Ansible can authenticate and connect to the Kubernetes server
 ```bash
 ansible k8s-server -m ping
 ```
+![archit-k8s-snap](Snap-k8s-CI-CD/ansible-ping.png)
 
 If everything is configured correctly, you should receive a successful "pong" response from Ansible.
 
@@ -433,8 +434,8 @@ If everything is configured correctly, you should receive a successful "pong" re
    ```bash
    kubectl get pods -A
    ```
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png) 
+![tools-k8s-server](Snap-k8s-CI-CD/tools-k8s-server.png) 
 
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+![deploy-service-pod](Snap-k8s-CI-CD/deploy-service-pod.png)
 
-![archit-k8s-snap](Snap-k8s-CI-CD/project-architecture.png)
+![deployed-snap](Snap-k8s-CI-CD/deployed-snap.png)
