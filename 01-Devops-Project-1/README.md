@@ -19,6 +19,15 @@ The project sets up Jenkins and Kubernetes servers dynamically using Terraform. 
 <a href="https://www.jenkins.io">
   <img src="https://get.jenkins.io/art/jenkins-logo/logo.svg" alt="Jenkins" width="100">
 </a>  
+<a href="https://code.visualstudio.com/">
+  <img src="https://www.svgrepo.com/show/452129/vs-code.svg" alt="Visual Studio Code" width="100">
+</a>
+<a href="https://git-scm.com/">
+  <img src="https://www.svgrepo.com/show/452210/git.svg" alt="Git" width="100">
+</a>
+<a href="https://github.com">
+  <img src="https://www.svgrepo.com/show/475654/github-color.svg" alt="GitHub" width="100">
+</a>
 <a href="https://www.docker.com">
   <img src="https://www.svgrepo.com/show/303231/docker-logo.svg" alt="Docker" width="100">
 </a>  
