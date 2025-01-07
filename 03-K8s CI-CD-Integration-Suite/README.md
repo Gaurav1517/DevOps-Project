@@ -1,4 +1,4 @@
- # Kubernetes CI/CD Integration Suite
+ # <a href="https://kubernetes.io"><img src="https://www.svgrepo.com/show/376331/kubernetes.svg" alt="Kubernetes" width="50"></a>Kubernetes CI/CD Integration Suite
 
 ## **Project Description: Building and Deploying Artifacts on Kubernetes**  
 
