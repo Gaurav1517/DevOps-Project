@@ -105,7 +105,7 @@ if ($oldPath.Split(';') -inotcontains 'C:\minikube'){
 ```bash
 minikube start --driver=docker
 ```
-![minikube-start](/snap/minikube-start.png)
+![minikube-start](snap/minikube-start.png)
 ---
 
 ## 🧰 Manage Your Cluster
@@ -136,7 +136,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ```bash
 docker build -t <username>/task-5-app:latest .
 ```
-![build-image](/snap/build-image.png)
+![build-image](snap/build-image.png)
 
 ---
 
@@ -158,8 +158,8 @@ docker build -t <username>/task-5-app:latest .
 docker login -u gchauhan1517
 docker push <username>/task-5-app:latest
 ```
-![docker-login-push-image](/snap/docker-login.png)
-![docker-images](/snap/docker-images.png)
+![docker-login-push-image](snap/docker-login.png)
+![docker-images](snap/docker-images.png)
 ---
 
 ## 📄 Kubernetes YAML Files
@@ -246,7 +246,7 @@ kubectl config set-context --current --namespace=task-5
 ```bash
 kubectl config view --minify | findstr "namespace:"
 ```
-![create-resources](/snap/create-resources.png)
+![create-resources](snap/create-resources.png)
 ---
 
 ### 3. Interact with Resources
@@ -269,8 +269,8 @@ kubectl logs <pod-name>
 ```bash
 minikube service task-5-service
 ```
-![mini-kubeservice](/snap/minikube-service.png)
-![app-minikube-service](/snap/app-minikube-service.png)
+![mini-kubeservice](snap/minikube-service.png)
+![app-minikube-service](snap/app-minikube-service.png)
 
 ✅ Opens browser with your deployed web page.
 
@@ -285,7 +285,7 @@ Then open:
 ```
 http://localhost:8080
 ```
-![app-snap](/snap/app-snap.png)
+![app-snap](snap/app-snap.png)
 
 ---
 
@@ -295,8 +295,7 @@ http://localhost:8080
 * [Docker Desktop installation](https://docs.docker.com/desktop/setup/install/windows-install/)
 * [Kubernetes Docs](https://kubernetes.io/)
 * [Docker Hub](https://hub.docker.com/)
-
-```
-
+  
 ---
+
 
