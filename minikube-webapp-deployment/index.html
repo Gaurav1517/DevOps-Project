@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minikube Cluster Setup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #326ce5;
+      --dark: #1e2a38;
+      --bg: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    nav {
+      background-color: var(--dark);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #e0e0e0;
+    }
+
+    .cta-button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #275bb3;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 30px;
+      font-size: 1.5rem;
+    }
+
+    code, pre {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      display: block;
+      overflow-x: auto;
+      margin: 10px 0;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+
+    @media screen and (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .container {
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div><strong>Minikube Docs</strong></div>
+  <div>
+    <a href="#requirements">Requirements</a>
+    <a href="#install">Install</a>
+    <a href="#deploy">Deploy</a>
+    <a href="#references">Docs</a>
+  </div>
+</nav>
+
+<!-- Hero Header -->
+<header>
+  <h1><i class="fas fa-server"></i> Minikube Cluster Setup</h1>
+  <p>Learn how to run Kubernetes locally with Docker and Minikube.</p>
+  <button class="cta-button" onclick="document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });">
+    Get Started
+  </button>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <h2 id="requirements">🚀 What You’ll Need</h2>
+<ul>
+  <li>2 CPUs or more</li>
+  <li>2GB of free memory</li>
+  <li>20GB of disk space</li>
+  <li>Internet access</li>
+  <li>Container or VM manager (Docker, VirtualBox, etc.)</li>
+</ul>
+
+<h2>🔍 Check System Requirements</h2>
+
+<p><strong>Check Logical CPU Count:</strong></p>
+<pre><code>Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object NumberOfLogicalProcessors</code></pre>
+<p>This command fetches the number of CPU cores/logical processors available on your system.</p>
+
+<p><strong>Check Installed Memory:</strong></p>
+<pre><code>Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object TotalPhysicalMemory</code></pre>
+<p>Displays total physical RAM in bytes. You can convert it to GB for easier reading (divide by 1,073,741,824).</p>
+
+<p><strong>Check Available Disk Space:</strong></p>
+<pre><code>Get-PSDrive -PSProvider 'FileSystem' | Select-Object Name,Free,Used</code></pre>
+<p>Shows the available and used space on all file system drives.</p>
+
+<p><strong>Check Internet Connectivity:</strong></p>
+<pre><code>ping google.com</code></pre>
+<p>Ensures your system can reach the internet — required for downloading Minikube, Docker, and images.</p>
+
+
+  <h2 id="install">🐳 Install Docker Desktop</h2>
+  <p>Make sure WSL 2, Virtual Machine Platform, and Hyper-V are enabled.</p>
+  <pre><code>wsl --list --verbose</code></pre>
+  <pre><code>Get-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform</code></pre>
+  <p>Install Docker from <a href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank">Docker Docs</a></p>
+  <pre><code>docker --version</code></pre>
+
+  <h2>⚙️ Setup Minikube</h2>
+
+<p><strong>Create a Minikube Directory:</strong></p>
+<pre><code>New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force</code></pre>
+<p>Creates a new directory <code>C:\minikube</code> to store the Minikube executable.</p>
+
+<p><strong>Download Minikube Binary:</strong></p>
+<pre><code>Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe'</code></pre>
+<p>Downloads the latest Minikube executable from GitHub.</p>
+
+<p><strong>Add Minikube to PATH:</strong></p>
+<pre><code>[Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\minikube", [EnvironmentVariableTarget]::Machine)</code></pre>
+<p>Adds the Minikube binary location to your system PATH so you can use <code>minikube</code> from any terminal.</p>
+
+<p><strong>Start the Cluster:</strong></p>
+<pre><code>minikube start --driver=docker</code></pre>
+<p>Bootstraps a local Kubernetes cluster using Docker as the VM/container driver.</p>
+
+
+  <h2 id="deploy">📦 Docker & Kubernetes Deployment</h2>
+  <pre><code>FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</code></pre>
+
+  <pre><code>docker build -t yourname/task-5-app:latest .
+docker login
+docker push yourname/task-5-app:latest</code></pre>
+
+  <h3>Kubernetes YAML</h3>
+  <pre><code>kubectl apply -f namespace.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml</code></pre>
+
+  <h3>Manage Resources</h3>
+  <pre><code>kubectl get pods
+kubectl get svc
+kubectl scale deployment task-5-deployment --replicas=4</code></pre>
+
+  <h2 id="references">🔗 References</h2>
+  <ul>
+    <li><a href="https://minikube.sigs.k8s.io/docs/start/">Minikube Docs</a></li>
+    <li><a href="https://docs.docker.com/">Docker Docs</a></li>
+    <li><a href="https://kubernetes.io/">Kubernetes</a></li>
+    <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+  </ul>
+</div>
+
+<footer>
+  <p>© 2025 Minikube Setup Guide. Built with 💙 by Gaurav Chauhan</p>
+</footer>
+
+</body>
+</html>

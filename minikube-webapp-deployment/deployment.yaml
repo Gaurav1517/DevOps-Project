@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-5-deployment
+  namespace: task-5
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-5-app
+  template:
+    metadata:
+      labels:
+        app: task-5-app
+    spec:
+      containers:
+      - name: task-container
+        image: gchauhan1517/task-5-app
+        ports:
+        - containerPort: 8080
