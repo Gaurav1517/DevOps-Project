@@ -1,4 +1,4 @@
-# 🚀 TASK-03: Provision Local Docker Container using Terraform
+# 🚀 Provision Local Docker Container using Terraform
 
 This project demonstrates how to:
 - Install Terraform on Windows
