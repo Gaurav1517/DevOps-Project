@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Provision Docker with Terraform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background: #4a90e2;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+header .subtitle {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+.technologies {
+  background: #ffffff;
+  padding: 30px;
+  margin: 30px 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tech-item {
+  text-align: center;
+  width: 100px;
+}
+
+.tech-item img {
+  width: 60px;
+  height: 60px;
+}
+
+.content {
+  background: #ffffff;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.content pre {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 15px;
+  margin: 10px 0;
+  overflow-x: auto;
+  border-radius: 5px;
+}
+
+.content code {
+  font-family: 'Courier New', monospace;
+}
+
+.content ul {
+  margin: 10px 0 20px 20px;
+}
+
+.content a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #eee;
+}
+
+footer button {
+  margin-top: 10px;
+  background: #4a90e2;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .tech-list {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Provision Docker Containers with Terraform</h1>
+      <p class="subtitle">A Step-by-Step Guide to Using Infrastructure as Code (IaC)</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="technologies">
+      <h2>🛠 Technologies Used</h2>
+      <div class="tech-list">
+        <div class="tech-item">
+          <img src="https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg" alt="Terraform" />
+          <p>Terraform</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" alt="Docker" />
+          <p>Docker</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg" alt="HTML" />
+          <p>HTML</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg" alt="CSS" />
+          <p>CSS</p>
+        </div>
+        <div class="tech-item">
+          <img src="https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" alt="JavaScript" />
+          <p>JavaScript</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <h2>📘 Step-by-Step Guide</h2>
+
+      <h3>📁 Project Structure</h3>
+      <pre><code>
+TASK-03/
+├── Dockerfile
+├── index.html
+├── main.tf
+├── provider.tf
+├── README.md
+├── terraform.tfvars
+└── var.tf
+      </code></pre>
+
+      <h3>📝 Create index.html</h3>
+      <pre><code>&lt;h1&gt;Hello from custom Docker container!&lt;/h1&gt;</code></pre>
+
+      <h3>🐳 Dockerfile</h3>
+      <pre><code>
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+      </code></pre>
+
+      <h3>🏗 Build Docker Image</h3>
+      <pre><code>docker build -t my-custom-nginx .</code></pre>
+
+      <h3>🛠 Terraform Files</h3>
+      <strong>main.tf</strong>
+      <pre><code>
+provider "docker" {
+  host = "npipe:////.//pipe//docker_engine"
+}
+
+resource "docker_container" "nginx" {
+  name  = var.container_name
+  image = var.image_name
+
+  ports {
+    internal = var.internal_port
+    external = var.external_port
+  }
+}
+      </code></pre>
+
+      <strong>var.tf</strong>
+      <pre><code>
+variable "image_name" {
+  default = "my-custom-nginx"
+}
+
+variable "container_name" {
+  default = "custom-nginx"
+}
+
+variable "internal_port" {
+  default = 80
+}
+
+variable "external_port" {
+  default = 8080
+}
+      </code></pre>
+
+      <h3>🚀 Terraform Commands</h3>
+      <ul>
+        <li><code>terraform init</code></li>
+        <li><code>terraform plan</code></li>
+        <li><code>terraform apply</code></li>
+        <li><code>terraform destroy</code></li>
+      </ul>
+
+      <h3>✅ Result</h3>
+      <p>Visit <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> to see your custom container in action!</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Made with 💻 by Gaurav Chauhan</p>
+    <button onclick="scrollToTop()">⬆ Back to Top</button>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
