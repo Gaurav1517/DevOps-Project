@@ -86,7 +86,7 @@ Expected output:
 ```
 task-3-image    latest   61473534f053   48.2MB
 ```
-![build-image](/snap/build-image.png)
+![build-image](snap/build-image.png)
 ---
 
 ## 🧱 4. Terraform Configuration
@@ -179,8 +179,8 @@ terraform plan
 # Step 5: Apply the configuration (auto-approve)
 terraform apply --auto-approve
 ```
-![tf-init](/snap/tf-init.png)
-![container-created](/snap/container-create-log.png)
+![tf-init](snap/tf-init.png)
+![container-created](snap/container-create-log.png)
 ---
 
 ## 🧼 6. Cleanup
@@ -205,7 +205,7 @@ To check the logs of container
 ```bash
 docker logs <container-name>
 ```
-![container-logs](/snap/container-create-log.png)
+![container-logs](snap/container-create-log.png)
 
 Open your browser:
 
@@ -213,7 +213,7 @@ Open your browser:
 http://localhost:8080 
 
 ```
-![app-snap](/snap/app-snap.png)
+![app-snap](snap/app-snap.png)
 
 
 Happy Automating! 🚀
